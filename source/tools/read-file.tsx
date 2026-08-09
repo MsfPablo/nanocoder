@@ -124,6 +124,9 @@ const executeReadFile = async (args: {
 			args.end_line === undefined &&
 			totalLines > FILE_READ_METADATA_THRESHOLD_LINES
 		) {
+			// An medium/large file has been seen (at least metadata); allow edits/overwrites against it.
+			markFileSeen(absPath);
+
 			// Return metadata only for medium/large files
 			// Detect file type from extension
 			const fileType = getFileType(absPath);
